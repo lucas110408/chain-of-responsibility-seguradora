@@ -1,0 +1,65 @@
+@startuml
+skinparam monochrome true
+skinparam style strictuml
+skinparam classBackgroundColor White
+skinparam backgroundColor White
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+abstract class Funcionario {
+  # listaSinistros : ArrayList
+  - funcionarioSuperior : Funcionario
+  + setFuncionarioSuperior(funcionarioSuperior : Funcionario)
+  + getDescricaoCargo() : String
+  + aprovarSinistro(sinistro : Sinistro) : String
+}
+
+class FuncionarioAnalista {
+}
+
+class FuncionarioSupervisor {
+}
+
+class FuncionarioGerente {
+}
+
+class FuncionarioDiretor {
+}
+
+class Sinistro {
+  - tipoSinistro : TipoSinistro
+}
+
+interface TipoSinistro <<interface>> {
+}
+
+class TipoSinistroVidros {
+}
+
+class TipoSinistroColisao {
+}
+
+class TipoSinistroRoubo {
+}
+
+class TipoSinistroPerdaTotal {
+}
+
+class TipoSinistroGuerra {
+}
+
+Funcionario --> "0..1" Funcionario : funcionarioSuperior
+Funcionario <|-- FuncionarioAnalista
+Funcionario <|-- FuncionarioSupervisor
+Funcionario <|-- FuncionarioGerente
+Funcionario <|-- FuncionarioDiretor
+
+Funcionario ..> Sinistro
+Sinistro --> "1" TipoSinistro
+
+TipoSinistro <|.. TipoSinistroVidros
+TipoSinistro <|.. TipoSinistroColisao
+TipoSinistro <|.. TipoSinistroRoubo
+TipoSinistro <|.. TipoSinistroPerdaTotal
+TipoSinistro <|.. TipoSinistroGuerra
+@enduml
